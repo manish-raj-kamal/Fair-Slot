@@ -1,12 +1,22 @@
-* {
+/* ── Global font: Quicksand (Light=300, Regular=400, Medium=500, Semi-bold=600, Bold=700) ── */
+html {
+  font-family: 'Quicksand', 'Segoe UI', sans-serif;
+  font-size: 16px;
+}
+
+*, *::before, *::after {
   box-sizing: border-box;
+  font-family: inherit;
 }
 
 body {
   margin: 0;
   font-family: 'Quicksand', 'Segoe UI', sans-serif;
+  font-weight: 400;
   background: #f4f6fb;
   color: #1c2340;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -56,7 +66,7 @@ h1, h2, h3, p {
   align-items: center;
   gap: 10px;
   padding: 6px 10px 14px;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.08rem;
   letter-spacing: 0.3px;
   color: #1e2340;
@@ -79,7 +89,7 @@ h1, h2, h3, p {
   border-radius: 12px;
   font-size: 0.88rem;
   color: #8892b3;
-  cursor: poQuicksand;
+  cursor: pointer;
   transition: background 0.2s;
 }
 .sb-search:hover { background: rgba(225, 230, 248, 0.7); }
@@ -108,7 +118,7 @@ h1, h2, h3, p {
   border: none;
   width: 100%;
   text-align: left;
-  cursor: poQuicksand;
+  cursor: pointer;
   transition: background 0.18s, color 0.18s, transform 0.15s;
   position: relative;
 }
@@ -147,7 +157,7 @@ h1, h2, h3, p {
 
 /* Shared icon style */
 .w8-icon {
-  poQuicksand-events: none;
+  pointer-events: none;
   user-select: none;
   color: currentColor;
 }
@@ -227,7 +237,7 @@ h1, h2, h3, p {
   background: rgba(240, 68, 82, 0.08);
   color: #e0414f;
   font-size: 1rem;
-  cursor: poQuicksand;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -263,7 +273,7 @@ h1, h2, h3, p {
   border-radius: 10px;
   padding: 9px 14px;
   font-weight: 600;
-  cursor: poQuicksand;
+  cursor: pointer;
 }
 
 .btn.primary {
@@ -427,12 +437,14 @@ h1, h2, h3, p {
 .search-input,
 input,
 select,
-textarea {
+textarea,
+button {
   border: 1px solid #ccd4ec;
   border-radius: 10px;
   padding: 9px 11px;
   background: #fff;
-  font: inherit;
+  font-family: 'Quicksand', 'Segoe UI', sans-serif;
+  font-size: inherit;
   color: #1c2340;
 }
 
@@ -562,7 +574,7 @@ textarea {
   height: 340px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, rgba(99,102,241,0.06) 50%, transparent 70%);
-  poQuicksand-events: none;
+  pointer-events: none;
 }
 
 .profile-glass-bg::after {
@@ -603,7 +615,7 @@ textarea {
   display: grid;
   place-items: center;
   font-size: 1.6rem;
-  font-weight: 800;
+  font-weight: 700;
   color: #fff;
   letter-spacing: 1px;
   overflow: hidden;
@@ -624,7 +636,7 @@ textarea {
 
 .profile-name {
   font-size: 1.55rem;
-  font-weight: 800;
+  font-weight: 700;
   color: #0f1530;
   line-height: 1.2;
 }
@@ -737,7 +749,7 @@ textarea {
 
 .profile-stat-value {
   font-size: 1.35rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .auth-wrap {
@@ -1046,7 +1058,7 @@ textarea {
   font-weight: 600;
   font-size: 0.85rem;
   color: #63709d;
-  cursor: poQuicksand;
+  cursor: pointer;
   transition: color 0.3s ease;
 }
 
@@ -1150,7 +1162,7 @@ textarea {
   color: #3c4043;
   font-size: 0.95rem;
   font-weight: 500;
-  cursor: poQuicksand;
+  cursor: pointer;
   transition: background 0.18s, box-shadow 0.18s, border-color 0.18s, transform 0.18s;
   box-shadow: 0 10px 18px rgba(15, 23, 42, 0.04);
   letter-spacing: 0.01em;
@@ -1338,7 +1350,7 @@ textarea {
   position: relative;
   transform: translateX(0);
   opacity: 1;
-  poQuicksand-events: auto;
+  pointer-events: auto;
 }
 
 .reg-step-panel.hidden-left {
@@ -1348,7 +1360,7 @@ textarea {
   right: 32px;
   transform: translateX(-120%);
   opacity: 0;
-  poQuicksand-events: none;
+  pointer-events: none;
   height: 0;
   overflow: hidden;
 }
@@ -1360,7 +1372,7 @@ textarea {
   right: 32px;
   transform: translateX(120%);
   opacity: 0;
-  poQuicksand-events: none;
+  pointer-events: none;
   height: 0;
   overflow: hidden;
 }
@@ -1479,7 +1491,7 @@ textarea {
 .otp-actions button {
   background: none;
   border: none;
-  cursor: poQuicksand;
+  cursor: pointer;
   padding: 4px 0;
   font-weight: 500;
 }
@@ -1589,7 +1601,7 @@ textarea {
 .floating-icons {
   position: fixed;
   inset: 0;
-  poQuicksand-events: none;
+  pointer-events: none;
   z-index: 1;
   overflow: hidden;
 }
@@ -1643,7 +1655,7 @@ textarea {
 }
 
 .landing-brand {
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.2rem;
   color: #0f1530;
 }
@@ -1691,7 +1703,7 @@ textarea {
 
 .landing-title {
   font-size: 3.2rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.12;
   color: #0f1530;
   margin-bottom: 16px;
@@ -1831,7 +1843,7 @@ textarea {
 .section-title {
   text-align: center;
   font-size: 1.85rem;
-  font-weight: 800;
+  font-weight: 700;
   color: #0f1530;
   margin-bottom: 32px;
 }
@@ -1885,7 +1897,7 @@ textarea {
 
 .landing-cta h2 {
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .landing-cta p {
@@ -2008,7 +2020,7 @@ textarea {
   border: 1px solid #cfd9ea;
   border-radius: 10px;
   background: #ffffff;
-  cursor: poQuicksand;
+  cursor: pointer;
   align-items: center;
   justify-content: center;
   padding: 8px;
@@ -2485,14 +2497,14 @@ textarea {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    poQuicksand-events: none;
+    pointer-events: none;
     transition: max-height 0.24s ease, opacity 0.2s ease;
   }
 
   .pl-nav.menu-open .pl-nav-menu {
     max-height: 320px;
     opacity: 1;
-    poQuicksand-events: auto;
+    pointer-events: auto;
   }
 
   .pl-nav-center {
@@ -3293,7 +3305,7 @@ textarea {
 .luxe-ambient {
   position: absolute;
   inset: -24%;
-  poQuicksand-events: none;
+  pointer-events: none;
   z-index: -1;
 }
 
@@ -3740,7 +3752,7 @@ textarea {
   justify-content: space-between;
   gap: 12px;
   text-align: left;
-  cursor: poQuicksand;
+  cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
@@ -4029,7 +4041,7 @@ textarea {
   text-align: left;
   display: grid;
   gap: 3px;
-  cursor: poQuicksand;
+  cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -4084,7 +4096,7 @@ textarea {
 .audit-dev-bg {
   position: absolute;
   inset: 0;
-  poQuicksand-events: none;
+  pointer-events: none;
   background-image:
     linear-gradient(rgba(93, 113, 168, 0.13) 1px, transparent 1px),
     linear-gradient(90deg, rgba(93, 113, 168, 0.13) 1px, transparent 1px);
@@ -4520,7 +4532,7 @@ textarea {
   border: 1px solid #d0d7ea;
   background: #f4f6fb;
   font-size: 0.85rem;
-  cursor: poQuicksand;
+  cursor: pointer;
   transition: all 0.15s;
   font-weight: 500;
   display: inline-flex;
@@ -4693,7 +4705,7 @@ textarea {
 
 .verify-level-ring span {
   font-size: 1.6rem;
-  font-weight: 800;
+  font-weight: 700;
   color: #fff;
 }
 
@@ -4768,7 +4780,7 @@ textarea {
   padding: 28px 20px;
   border: 2px dashed #c5cee6;
   border-radius: 12px;
-  cursor: poQuicksand;
+  cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
 }
 
@@ -4857,7 +4869,7 @@ textarea {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 0.82rem;
   background: #e9eefc;
   color: #63709d;
@@ -4906,3 +4918,4 @@ textarea {
     font-size: 1.1rem;
   }
 }
+

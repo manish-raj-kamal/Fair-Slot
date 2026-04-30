@@ -2,6 +2,8 @@ import React from 'react';
 
 /**
  * FairSlot logo mark with optional wordmark.
+ * Uses FairSlot_LogoWithBG.svg which has its own background.
+ * No extra shell/background is applied — the SVG is rendered as-is.
  */
 export default function Logo({
   size = 32,
@@ -9,57 +11,29 @@ export default function Logo({
   className = '',
   textColor = '#1e293b',
   style = {},
-  surface = 'light'
 }) {
-  const logoScale = 1.18;
-  const markSize = size * logoScale;
-  const darkSurface = surface === 'dark';
-  const shellStyle = darkSurface
-    ? {
-        background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 250, 255, 0.92) 100%)',
-        border: '1px solid rgba(255, 255, 255, 0.72)',
-        boxShadow: '0 14px 30px rgba(15, 23, 42, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.92)'
-      }
-    : {
-        background: 'rgba(255, 255, 255, 0.92)',
-        border: '1px solid rgba(226, 232, 240, 0.92)',
-        boxShadow: '0 10px 24px rgba(15, 23, 42, 0.08)'
-      };
+  const markSize = Math.round(size * 1.2);
 
   return (
     <span
       className={`fairslot-logo ${className}`}
-      style={{ display: 'inline-flex', alignItems: 'center', gap: 10, ...style }}
+      style={{ display: 'inline-flex', alignItems: 'center', gap: 8, ...style }}
     >
-      <span
-        style={{
-          width: size,
-          height: size,
-          display: 'inline-grid',
-          placeItems: 'center',
-          flexShrink: 0,
-          overflow: 'visible',
-          borderRadius: 10,
-          padding: 2,
-          background: 'transparent',
-        }}
-      >
-        <img
-          src="/FairSlot_LogoWithBG.svg"
-          alt="FairSlot logo"
-          width={markSize}
-          height={markSize}
-          className="fairslot-logo-mark"
-          style={{ objectFit: 'contain', objectPosition: 'center center', display: 'block' }}
-        />
-      </span>
+      <img
+        src="/FairSlot_LogoWithBG.svg"
+        alt="FairSlot logo"
+        width={markSize}
+        height={markSize}
+        className="fairslot-logo-mark"
+        style={{ objectFit: 'contain', display: 'block', flexShrink: 0 }}
+      />
 
       {showText && (
         <span style={{
           fontFamily: "'Quicksand', sans-serif",
-          fontWeight: 600,
+          fontWeight: 700,
           fontSize: size * 0.65,
-          letterSpacing: '-0.02em',
+          letterSpacing: '-0.01em',
           color: textColor,
           lineHeight: 1,
           whiteSpace: 'nowrap',
