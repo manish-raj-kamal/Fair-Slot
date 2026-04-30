@@ -65,7 +65,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="auth-page">
+    <div className="auth-page login-page">
       <div className="auth-side">
         <div className="auth-side-content">
           <Link to="/" className="auth-brand">

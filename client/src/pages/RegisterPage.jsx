@@ -164,7 +164,7 @@ export default function RegisterPage() {
   }[step];
 
   return (
-    <div className="auth-page reg-page">
+    <div className="auth-page register-page">
       <div className="auth-side">
         <div className="auth-side-content reg-side-content" key={step}>
           <Link to="/" className="auth-brand">
