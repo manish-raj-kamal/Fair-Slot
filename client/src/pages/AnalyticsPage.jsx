@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getBookingsPerWeek, getConflictRate, getMostUsedUtilities, getRevenueData } from '../services/api';
+import { getBookingsPerWeek, getConflictRate, getMostUsedUtilities, getRevenueData } from '../services/api.js';
 
 const rankColors = ['#6366f1','#0ea5e9','#10b981','#f59e0b','#ec4899','#8b5cf6'];
 const rowShades = ['#f0f7ff','#f0fff8','#fff8f0','#fdf4ff','#f0f9ff','#fff0f3'];

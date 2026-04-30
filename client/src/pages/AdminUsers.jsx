@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { deleteUser, getAllUsers, updateUser } from '../services/api';
+import { deleteUser, getAllUsers, updateUser } from '../services/api.js';
 
 export default function AdminUsers() {
   const [users, setUsers] = useState([]);

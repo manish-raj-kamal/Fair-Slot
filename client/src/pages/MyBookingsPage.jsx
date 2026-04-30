@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { cancelBooking, createPaymentOrder, getMyBookings, getRazorpayKey, verifyPayment } from '../services/api';
+import { cancelBooking, createPaymentOrder, getMyBookings, getRazorpayKey, verifyPayment } from '../services/api.js';
 
 const formatRange = (startValue, endValue) => {
   const start = new Date(startValue);

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { getNotifications, markAllNotificationsRead, markNotificationRead } from '../services/api';
+import { getNotifications, markAllNotificationsRead, markNotificationRead } from '../services/api.js';
 
 const labelByType = {
   booking: 'Booking',

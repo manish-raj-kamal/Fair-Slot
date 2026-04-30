@@ -1,9 +1,9 @@
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import W8Icon from '../components/W8Icon';
-import Logo from '../components/Logo';
-import { getNotifications } from '../services/api';
+import { useAuth } from '../context/useAuth.js';
+import W8Icon from '../components/W8Icon.jsx';
+import Logo from '../components/Logo.jsx';
+import { getNotifications } from '../services/api.js';
 
 /* ── Icon name map (maps nav label → W8Icon name key) ── */
 const navIconNames = {
@@ -157,7 +157,7 @@ export default function AppLayout() {
         {/* Brand */}
         <div className="sb-brand">
           <Logo size={28} />
-          <span className="sb-brand-text" style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 600 }}>FairSlot</span>
+          <span className="sb-brand-text" style={{ fontFamily: "'Quicksand', sans-serif", fontWeight: 600 }}>FairSlot</span>
         </div>
 
         {/* Search (visual placeholder) */}

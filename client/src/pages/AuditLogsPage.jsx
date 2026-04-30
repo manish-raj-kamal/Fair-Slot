@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { getAuditLogs } from '../services/api';
+import { getAuditLogs } from '../services/api.js';
 
 const formatTime = (value) =>
   new Date(value).toLocaleString('en-IN', {

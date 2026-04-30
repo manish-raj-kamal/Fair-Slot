@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import FloatingIcons from '../components/FloatingIcons';
-import GoogleLoginButton from '../components/GoogleLoginButton';
-import W8Icon from '../components/W8Icon';
-import Logo from '../components/Logo';
+import { useAuth } from '../context/useAuth.js';
+import GoogleLoginButton from '../components/GoogleLoginButton.jsx';
+import W8Icon from '../components/W8Icon.jsx';
+import Logo from '../components/Logo.jsx';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -12,6 +11,10 @@ export default function LoginPage() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    document.title = 'FairSlot | Sign in';
+  }, []);
 
   const getHomeRoute = (user) => {
     if (user.role === 'superadmin') return '/admin/organizations';
@@ -63,30 +66,28 @@ export default function LoginPage() {
 
   return (
     <div className="auth-page">
-      <FloatingIcons />
-
-      {/* Left branding panel */}
       <div className="auth-side">
         <div className="auth-side-content">
           <Link to="/" className="auth-brand">
-            <Logo size={24} showText textColor="#e8f1ff" />
+            <Logo size={24} showText textColor="#e8f1ff" surface="dark" />
           </Link>
-          <h1>Welcome back</h1>
-          <p>Sign in to manage your bookings, view schedules, and access your community's shared utilities.</p>
+          <span className="auth-side-badge">Shared utility workspace</span>
+          <h1>Sign in and keep utility operations moving.</h1>
+          <p>Review bookings, approvals, and usage in one place without switching between tools.</p>
           <div className="auth-side-features">
-            <div className="auth-feature"><W8Icon name="calendar" size={22} alt="" /> Smart calendar scheduling</div>
-            <div className="auth-feature"><W8Icon name="verification" size={22} alt="" /> Fair access for everyone</div>
-            <div className="auth-feature"><W8Icon name="analytics" size={22} alt="" /> Usage analytics</div>
+            <div className="auth-feature"><W8Icon name="calendar-check" size={20} alt="" /> Book slots with conflict checks</div>
+            <div className="auth-feature"><W8Icon name="shield-check" size={20} alt="" /> Apply fairness rules consistently</div>
+            <div className="auth-feature"><W8Icon name="trend" size={20} alt="" /> Review usage and approvals at a glance</div>
           </div>
         </div>
       </div>
 
-      {/* Right form panel */}
       <div className="auth-form-side">
         <form className="auth-form-card" onSubmit={onSubmit}>
           <div className="auth-form-header">
+            <span className="auth-kicker">Secure access</span>
             <h2>Sign in</h2>
-            <p className="muted">Enter your credentials to continue</p>
+            <p className="muted">Enter your details to continue to your workspace.</p>
           </div>
 
           {error && <p className="error-banner">{error}</p>}
@@ -118,9 +119,15 @@ export default function LoginPage() {
           <div className="test-accounts">
             <p className="test-accounts-label">Quick test login</p>
             <div className="test-btns">
-              <button type="button" className="test-btn member" onClick={() => testLogin('member@test.com', 'member123')}>👤 Member</button>
-              <button type="button" className="test-btn admin" onClick={() => testLogin('admin@test.com', 'admin123')}>🛡️ Org Admin</button>
-              <button type="button" className="test-btn superadmin" onClick={() => testLogin('superadmin@utility.com', 'super123')}>⭐ Superadmin</button>
+              <button type="button" className="test-btn member" onClick={() => testLogin('member@test.com', 'member123')}>
+                <W8Icon name="people" size={16} alt="" /> Member
+              </button>
+              <button type="button" className="test-btn admin" onClick={() => testLogin('admin@test.com', 'admin123')}>
+                <W8Icon name="building" size={16} alt="" /> Org Admin
+              </button>
+              <button type="button" className="test-btn superadmin" onClick={() => testLogin('superadmin@utility.com', 'super123')}>
+                <W8Icon name="workspace" size={16} alt="" /> Superadmin
+              </button>
             </div>
           </div>
         </form>

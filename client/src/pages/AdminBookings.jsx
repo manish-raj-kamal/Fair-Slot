@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { adminOverrideBooking, getAllBookings } from '../services/api';
+import { adminOverrideBooking, getAllBookings } from '../services/api.js';
 
 const formatRange = (startValue, endValue) => {
   const start = new Date(startValue);

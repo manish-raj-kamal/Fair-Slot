@@ -1,81 +1,33 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import Logo from '../components/Logo';
+import { useAuth } from '../context/useAuth.js';
+import Logo from '../components/Logo.jsx';
 
-const featureCards = [
+const howItWorks = [
   {
-    title: 'Smart Slot Intelligence',
-    desc: 'A guided calendar flow that helps residents request the right utility slot in seconds.'
+    step: '1',
+    title: 'Choose a utility',
+    desc: 'Open the utility board, check pricing and rules, and select an available slot.'
   },
   {
-    title: 'Fairness Engine',
-    desc: 'Dynamic scoring reduces slot hoarding and keeps allocation transparent across the community.'
+    step: '2',
+    title: 'Submit your booking',
+    desc: 'FairSlot checks overlap, policy limits, and fairness rules before finalizing status.'
   },
   {
-    title: 'Auto Waitlist Promotion',
-    desc: 'Waitlisted users are promoted automatically when matching slots become available.'
-  },
-  {
-    title: 'Payment Ready Bookings',
-    desc: 'Collect payments only when needed with clean booking-to-payment continuity.'
-  },
-  {
-    title: 'Role Based Operations',
-    desc: 'Separate experiences for members, org admins, and superadmins with secure boundaries.'
-  },
-  {
-    title: 'Audit and Traceability',
-    desc: 'Every sensitive action can be traced with actor, time, request path, and security metadata.'
-  }
-];
-
-const platformStats = [
-  { value: '24x7', label: 'Booking Visibility' },
-  { value: '8+', label: 'Utility Categories' },
-  { value: '< 30s', label: 'Average Booking Flow' },
-  { value: '100%', label: 'Traceable Admin Actions' }
-];
-
-const workflow = [
-  {
-    step: '01',
-    title: 'Explore Utility Board',
-    desc: 'Search utility inventory and compare pricing, limits, and availability quickly.'
-  },
-  {
-    step: '02',
-    title: 'Request a Time Slot',
-    desc: 'Select date and time range, then submit the booking request with context-aware checks.'
-  },
-  {
-    step: '03',
-    title: 'Get Decision Instantly',
-    desc: 'Receive an immediate status: approved or waitlist based on fairness and existing conflicts.'
-  },
-  {
-    step: '04',
-    title: 'Track and Manage',
-    desc: 'Monitor bookings, payments, and notifications from a single dashboard.'
-  }
-];
-
-const personas = [
-  {
-    title: 'Residents',
-    points: ['Book shared resources quickly', 'Get instant status and reminders', 'Track spend and usage']
-  },
-  {
-    title: 'Organization Admins',
-    points: ['Manage utilities and users', 'Override conflicts responsibly', 'See live operational signals']
-  },
-  {
-    title: 'Superadmins',
-    points: ['Control organization verification', 'View cross-org analytics', 'Inspect deep audit trails']
+    step: '3',
+    title: 'Track status in one place',
+    desc: 'Approved, waitlisted, and completed bookings stay visible on your dashboard.'
   }
 ];
 
 export default function LandingPage() {
   const { user } = useAuth();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = 'FairSlot | Shared Utility Booking';
+  }, []);
 
   const dashboardPath = !user
     ? '/login'
@@ -87,55 +39,59 @@ export default function LandingPage() {
           ? '/dashboard'
           : '/verification';
 
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
   return (
     <div className="prime-landing">
-      <div className="prime-landing-bg" aria-hidden="true">
-        <span className="pl-orb orb-a" />
-        <span className="pl-orb orb-b" />
-        <span className="pl-orb orb-c" />
-        <span className="pl-ring ring-a" />
-        <span className="pl-ring ring-b" />
-        <span className="pl-grid" />
-      </div>
-
-      <nav className="pl-nav">
+      <nav className={`pl-nav ${mobileMenuOpen ? 'menu-open' : ''}`}>
         <div className="pl-brand">
-          <Logo size={30} />
-          <div className="pl-brand-copy">
-            <strong>FairSlot</strong>
-            <span>Utility intelligence platform</span>
+          <div className="pl-brand-main">
+            <Logo size={30} />
+            <div className="pl-brand-copy">
+              <strong>FairSlot</strong>
+              <span>Shared utility booking</span>
+            </div>
           </div>
+          <button
+            type="button"
+            className={`pl-nav-toggle ${mobileMenuOpen ? 'open' : ''}`}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="landing-navigation"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+          >
+            <span className="stair-line one" />
+            <span className="stair-line two" />
+            <span className="stair-line three" />
+          </button>
         </div>
 
-        <div className="pl-nav-center">
-          <a href="#features" className="pl-nav-link">Features</a>
-          <a href="#workflow" className="pl-nav-link">Workflow</a>
-          <a href="#trust" className="pl-nav-link">Trust</a>
-        </div>
+        <div id="landing-navigation" className="pl-nav-menu">
+          <div className="pl-nav-center">
+            <a href="#how-it-works" className="pl-nav-link" onClick={closeMobileMenu}>How it works</a>
+            <a href="#benefits" className="pl-nav-link" onClick={closeMobileMenu}>Benefits</a>
+            <a href="#security" className="pl-nav-link" onClick={closeMobileMenu}>Security</a>
+          </div>
 
-        <div className="pl-nav-actions">
-          {user ? (
-            <Link to={dashboardPath} className="btn primary">Dashboard</Link>
-          ) : (
-            <>
-              <Link to="/login" className="pl-login-link">Log in</Link>
-              <Link to="/register" className="btn primary">Start Free</Link>
-            </>
-          )}
+          <div className="pl-nav-actions">
+            {user ? (
+              <Link to={dashboardPath} className="btn primary" onClick={closeMobileMenu}>Dashboard</Link>
+            ) : (
+              <>
+                <Link to="/login" className="pl-login-link" onClick={closeMobileMenu}>Log in</Link>
+                <Link to="/register" className="btn primary" onClick={closeMobileMenu}>Start Free</Link>
+              </>
+            )}
+          </div>
         </div>
       </nav>
 
       <header className="pl-hero">
         <div className="pl-hero-left">
-          <span className="pl-kicker">Built for modern communities and managed organizations</span>
-          <h1>
-            Shared utility booking
-            <br />
-            <span>designed like a control system.</span>
-          </h1>
+          <span className="pl-kicker">Production-grade scheduling for communities</span>
+          <h1>Book shared utilities in three clear steps.</h1>
           <p>
-            FairSlot brings scheduling, fairness, payments, and audit visibility together in one
-            streamlined platform so residents and admins always operate with clarity.
+            Residents book faster, admins resolve conflicts earlier, and every action stays traceable.
           </p>
 
           <div className="pl-hero-actions">
@@ -153,37 +109,33 @@ export default function LandingPage() {
         <div className="pl-hero-right">
           <article className="pl-live-card">
             <div className="pl-live-head">
-              <strong>Live Operations Snapshot</strong>
-              <span>Realtime</span>
+              <strong>How bookings move</strong>
+              <span>Simple flow</span>
             </div>
 
             <div className="pl-live-list">
               <div className="pl-live-row">
-                <span>Parking Zone A</span>
-                <em className="ok">Approved</em>
+                <span>1. Request submitted</span>
+                <em className="info">Check</em>
               </div>
               <div className="pl-live-row">
-                <span>Community Hall</span>
-                <em className="wait">Waitlist</em>
+                <span>2. Conflict + fairness validation</span>
+                <em className="info">Rules</em>
               </div>
               <div className="pl-live-row">
-                <span>EV Charger 02</span>
-                <em className="ok">Approved</em>
-              </div>
-              <div className="pl-live-row">
-                <span>Audit Stream</span>
-                <em className="info">Tracked</em>
+                <span>3. Approved or waitlisted</span>
+                <em className="ok">Result</em>
               </div>
             </div>
 
             <div className="pl-live-metrics">
               <div>
-                <span>Conflict Reduction</span>
-                <strong>92%</strong>
+                <span>Status updates</span>
+                <strong>Instant</strong>
               </div>
               <div>
-                <span>Waitlist Automation</span>
-                <strong>100%</strong>
+                <span>Audit trail</span>
+                <strong>Always on</strong>
               </div>
             </div>
           </article>
@@ -191,7 +143,11 @@ export default function LandingPage() {
       </header>
 
       <section className="pl-stats-strip">
-        {platformStats.map((item) => (
+        {[
+          { value: '< 1 min', label: 'Typical booking time' },
+          { value: 'Real-time', label: 'Status visibility' },
+          { value: '3 roles', label: 'Member and admin views' }
+        ].map((item) => (
           <article key={item.label}>
             <strong>{item.value}</strong>
             <span>{item.label}</span>
@@ -199,28 +155,13 @@ export default function LandingPage() {
         ))}
       </section>
 
-      <section id="features" className="pl-section">
+      <section id="how-it-works" className="pl-section workflow">
         <div className="pl-section-head">
-          <p>Core Capabilities</p>
-          <h2>Everything needed to run shared utilities at scale</h2>
-        </div>
-        <div className="pl-feature-grid">
-          {featureCards.map((card) => (
-            <article className="pl-feature-card" key={card.title}>
-              <h3>{card.title}</h3>
-              <p>{card.desc}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="workflow" className="pl-section workflow">
-        <div className="pl-section-head">
-          <p>How It Works</p>
-          <h2>From discovery to booking in four clear steps</h2>
+          <p>How it works</p>
+          <h2>A direct flow your team can trust</h2>
         </div>
         <div className="pl-workflow-grid">
-          {workflow.map((item) => (
+          {howItWorks.map((item) => (
             <article className="pl-workflow-card" key={item.step}>
               <span>{item.step}</span>
               <h3>{item.title}</h3>
@@ -230,41 +171,49 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="pl-section personas">
+      <section id="benefits" className="pl-section">
         <div className="pl-section-head">
-          <p>Purpose Built</p>
-          <h2>Useful for every role in the ecosystem</h2>
+          <p>Benefits</p>
+          <h2>Less manual coordination, better outcomes</h2>
         </div>
-        <div className="pl-persona-grid">
-          {personas.map((persona) => (
-            <article className="pl-persona-card" key={persona.title}>
-              <h3>{persona.title}</h3>
-              <ul>
-                {persona.points.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
+        <div className="pl-feature-grid">
+          {[
+            {
+              title: 'For residents',
+              desc: 'Find availability quickly and track every booking without back-and-forth messages.'
+            },
+            {
+              title: 'For admins',
+              desc: 'Manage utilities, resolve conflicts, and monitor usage from one operations view.'
+            },
+            {
+              title: 'For governance',
+              desc: 'Role-based access and action-level audit logs keep decisions transparent.'
+            }
+          ].map((card) => (
+            <article className="pl-feature-card" key={card.title}>
+              <h3>{card.title}</h3>
+              <p>{card.desc}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section id="trust" className="pl-trust-band">
+      <section id="security" className="pl-trust-band">
         <div>
           <h2>Security and accountability by default</h2>
-          <p>Audit events include actor context, request metadata, and event details for complete operational visibility.</p>
+          <p>FairSlot records who changed what and when, so your organization can audit operations without extra tooling.</p>
         </div>
         <div className="pl-trust-chip-list">
           <span>Role-aware access</span>
           <span>Action-level auditing</span>
           <span>Request traceability</span>
-          <span>Verification workflows</span>
         </div>
       </section>
 
       <section className="pl-final-cta">
-        <h2>Ready to modernize utility operations?</h2>
-        <p>Launch FairSlot for your community and move from manual coordination to intelligent scheduling.</p>
+        <h2>Ready to run utility bookings with clarity?</h2>
+        <p>Set up your workspace and start accepting bookings in minutes.</p>
         {user ? (
           <Link to={dashboardPath} className="btn primary lg">Go to Dashboard</Link>
         ) : (
@@ -274,7 +223,7 @@ export default function LandingPage() {
 
       <footer className="pl-footer">
         <span>© {new Date().getFullYear()} FairSlot</span>
-        <span>Smart booking for shared spaces</span>
+        <span>Shared utility operations platform</span>
       </footer>
     </div>
   );

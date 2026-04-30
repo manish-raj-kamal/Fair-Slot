@@ -1,54 +1,87 @@
-/**
- * W8Icon — Icons8 watercolor icon loaded from CDN.
- * Browse IDs at: https://icons8.com/icons/all--style-water-color
- *
- * Usage:
- *   <W8Icon id="idja0q6oFAQN" size={24} alt="home" />
- *
- * Predefined keys (use <W8Icon name="home" />):
- */
+import {
+  Home,
+  Zap,
+  Calendar,
+  CalendarCheck,
+  BookOpen,
+  Bell,
+  User,
+  Users,
+  Building2,
+  Building,
+  LineChart,
+  TrendingUp,
+  ClipboardList,
+  ShieldCheck,
+  Folder,
+  Search,
+  Settings,
+  Check,
+  CheckCircle,
+  Clock,
+  Coins,
+  Shield,
+  LayoutDashboard,
+  Phone,
+  Mail,
+  MailOpen,
+  Lock,
+  LayoutGrid,
+  Key,
+  HelpCircle,
+  UsersRound
+} from 'lucide-react';
 
 const ICONS = {
-  home:          'idja0q6oFAQN',
-  utilities:     'vzhJNJm8xDLu',   // lightning bolt
-  calendar:      'QKivoN3fCm7f',
-  bookings:      'NMf0U3aRO2MV',   // box / package
-  notifications: 'z8yqcMdq4T2h',   // appointment reminders
-  profile:       'HEBTcR9O3uzR',   // 3D fluent user
-  users:         'qQEmBWcJr3TX',   // 3D fluent user male
-  organizations: 'WBGSDb5LN2fp',   // 3D fluent small storefront with orange awning
-  analytics:     'DvsgOYRjuwlr',   // combo chart
-  audit:         'UTOf1sBsM6Tv',   // news / clipboard
-  verification:  'dwhGzD9VAiZ3',   // padlock / verification
-  folder:        'FYI6LfcQUyOR',   // opened folder
-  search:        'OxDyKkYjQ5Yk',   // binoculars
-  admin:         'idja0q6oFAQN',   // Home (admin home)
-  settings:      'Rg9GBTEpoDts',
-  check:         'mswvLW2p0NED',
-  clock:         'D2pEwbAN3psf',   // clock-8 (hours used)
-  coins:         'i8JDqvoJdGGY',   // 3D fluent dollar money bag (amount spent)
-  shield:        'j9U3SvBtTjaM',   // security pass
-  flat:          'QpU1t4EQD0xS',   // folder (repurposed as home unit)
-  phone:         'FetLlgyOVldq',   // event (repurposed)
-  email:         'czpd3OfwK2l4',
-  lock:          'dwhGzD9VAiZ3',
+  home: Home,
+  utilities: Zap,
+  calendar: Calendar,
+  'calendar-check': CalendarCheck,
+  bookings: BookOpen,
+  notifications: Bell,
+  profile: User,
+  users: Users,
+  people: UsersRound,
+  organizations: Building,
+  building: Building2,
+  analytics: LineChart,
+  trend: TrendingUp,
+  audit: ClipboardList,
+  verification: ShieldCheck,
+  'shield-check': ShieldCheck,
+  folder: Folder,
+  search: Search,
+  admin: Shield,
+  settings: Settings,
+  check: Check,
+  'check-circle': CheckCircle,
+  clock: Clock,
+  coins: Coins,
+  shield: Shield,
+  flat: LayoutDashboard,
+  phone: Phone,
+  email: Mail,
+  'mail-open': MailOpen,
+  lock: Lock,
+  'lock-check': ShieldCheck,
+  workspace: LayoutGrid,
+  key: Key
 };
 
 export { ICONS };
 
 export default function W8Icon({ id, name, size = 24, alt = '', className = '', style }) {
-  const iconId = id || ICONS[name];
-  if (!iconId) return null;
-
+  const iconName = id || name;
+  const IconComponent = ICONS[iconName] || HelpCircle;
+  
   return (
-    <img
-      src={`https://img.icons8.com/?size=${Math.round(size * 2)}&id=${iconId}&format=png`}
-      alt={alt || name || ''}
-      width={size}
-      height={size}
-      className={`w8-icon ${className}`}
-      style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0, ...style }}
-      draggable={false}
+    <IconComponent 
+      size={size} 
+      className={`w8-icon ${className}`} 
+      style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0, ...style }} 
+      aria-label={alt || iconName || 'icon'} 
+      strokeWidth={1.5}
     />
   );
 }
+

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { createUtility, deleteUtility, getUtilities, updateUtility } from '../services/api';
-import W8Icon from '../components/W8Icon';
+import { createUtility, deleteUtility, getUtilities, updateUtility } from '../services/api.js';
+import W8Icon from '../components/W8Icon.jsx';
 
 const typeOptions = [
   ['parking', 'Parking'],

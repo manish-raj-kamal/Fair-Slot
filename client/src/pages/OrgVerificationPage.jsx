@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/useAuth.js';
 import {
   createMyOrganization,
   joinOrganizationWithKey,
   requestToJoinOrganization,
   searchOrganizations
-} from '../services/api';
+} from '../services/api.js';
 
 const DIGITS_ONLY = /^\d+$/;
 const SIX_DIGITS = /^\d{6}$/;

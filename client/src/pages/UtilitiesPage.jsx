@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getUtilities } from '../services/api';
-import W8Icon from '../components/W8Icon';
+import { getUtilities } from '../services/api.js';
+import W8Icon from '../components/W8Icon.jsx';
 
 const iconByType = {
   parking: 'flat',

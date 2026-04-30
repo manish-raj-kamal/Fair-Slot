@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { approveOrganization, getOrganizations } from '../services/api';
+import { approveOrganization, getOrganizations } from '../services/api.js';
 
 const levelLabel = (level) =>
   ['Unverified', 'Email Verified', 'Docs Uploaded', 'Approved'][level] || `Level ${level}`;
@@ -25,7 +25,7 @@ export default function AdminOrganizations() {
     setLoading(true);
     getOrganizations()
       .then((r) => setOrgs(r.data))
-      .catch(() => {})
+      .catch((err) => console.error('Failed to fetch organizations', err))
       .finally(() => setLoading(false));
   };
 
@@ -39,7 +39,9 @@ export default function AdminOrganizations() {
     try {
       await approveOrganization(id);
       fetchOrgs();
-    } catch {}
+    } catch (err) {
+      console.error('Failed to approve organization', err);
+    }
     setActionId('');
   };
 

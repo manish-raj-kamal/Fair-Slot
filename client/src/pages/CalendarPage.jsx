@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { getCalendar, getUtilities, requestBooking } from '../services/api';
+import { getCalendar, getUtilities, requestBooking } from '../services/api.js';
 
 export default function CalendarPage() {
   const [params] = useSearchParams();

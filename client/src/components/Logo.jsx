@@ -1,68 +1,62 @@
 import React from 'react';
 
 /**
- * FairSlot logo — dark rounded square with calendar grid,
- * one glowing blue cell, and a subtle ring.
+ * FairSlot logo mark with optional wordmark.
  */
-export default function Logo({ size = 32, showText = false, className = '', textColor = '#1e293b', style = {} }) {
+export default function Logo({
+  size = 32,
+  showText = false,
+  className = '',
+  textColor = '#1e293b',
+  style = {},
+  surface = 'light'
+}) {
+  const logoScale = 1.18;
+  const markSize = size * logoScale;
+  const darkSurface = surface === 'dark';
+  const shellStyle = darkSurface
+    ? {
+        background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 250, 255, 0.92) 100%)',
+        border: '1px solid rgba(255, 255, 255, 0.72)',
+        boxShadow: '0 14px 30px rgba(15, 23, 42, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.92)'
+      }
+    : {
+        background: 'rgba(255, 255, 255, 0.92)',
+        border: '1px solid rgba(226, 232, 240, 0.92)',
+        boxShadow: '0 10px 24px rgba(15, 23, 42, 0.08)'
+      };
 
   return (
     <span
       className={`fairslot-logo ${className}`}
       style={{ display: 'inline-flex', alignItems: 'center', gap: 10, ...style }}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 100 100"
-        width={size}
-        height={size}
-        style={{ flexShrink: 0 }}
+      <span
+        style={{
+          width: size,
+          height: size,
+          display: 'inline-grid',
+          placeItems: 'center',
+          flexShrink: 0,
+          overflow: 'visible',
+          borderRadius: 10,
+          padding: 2,
+          background: 'transparent',
+        }}
       >
-        <defs>
-          {/* Glow filter for the highlighted cell */}
-          <filter id="fs-glow">
-            <feGaussianBlur stdDeviation="3" result="b" />
-            <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
-          </filter>
-          {/* Background gradient */}
-          <linearGradient id="fs-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#1e293b" />
-            <stop offset="100%" stopColor="#0f172a" />
-          </linearGradient>
-          {/* Accent gradient for the glowing cell */}
-          <linearGradient id="fs-accent" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#60a5fa" />
-            <stop offset="100%" stopColor="#3b82f6" />
-          </linearGradient>
-        </defs>
-
-        {/* Dark rounded square background */}
-        <rect width="100" height="100" rx="22" fill="url(#fs-bg)" />
-        <rect width="100" height="100" rx="22" fill="none" stroke="rgba(203, 213, 225, 0.45)" strokeWidth="1.8" />
-
-        {/* Subtle circular ring */}
-        {/* <circle cx="50" cy="50" r="36" stroke="rgba(255,255,255,0.12)" strokeWidth="1.5" fill="none" /> */}
-
-        {/* 3×3 calendar grid — 17px cells, 5px gaps, centered in 100×100 */}
-        {/* Row 1 */}
-        <rect x="19" y="19" width="17" height="17" rx="3.5" fill="rgb(255, 255, 255)" />
-        <rect x="41" y="19" width="17" height="17" rx="3.5" fill="rgb(255, 255, 255)" />
-        {/* <rect x="63" y="19" width="17" height="17" rx="3.5" fill="rgb(255, 255, 255)" /> */}
-        <rect x="63" y="19" width="17" height="17" rx="3.5" fill="#00ff73" filter="url(#fs-glow)" />
-        {/* Row 2 */}
-        <rect x="19" y="41" width="17" height="17" rx="3.5" fill="rgb(255, 255, 255)" />
-        {/* <rect x="41" y="41" width="17" height="17" rx="3.5" fill="rgb(255, 255, 255)" /> */}
-        <rect x="41" y="41" width="17" height="17" rx="3.5" fill="#ff0040" filter="url(#fs-glow)" />
-        <rect x="63" y="41" width="17" height="17" rx="3.5" fill="rgb(255, 255, 255)" />
-        {/* Row 3 */}
-        <rect x="19" y="63" width="17" height="17" rx="3.5" fill="rgb(255, 255, 255)" />
-        <rect x="41" y="63" width="17" height="17" rx="3.5" fill="rgb(255, 255, 255)" />
-        <rect x="63" y="63" width="17" height="17" rx="3.5" fill="rgb(255, 255, 255)" />
-      </svg>
+        <img
+          src="/FairSlot_LogoWithBG.svg"
+          alt="FairSlot logo"
+          width={markSize}
+          height={markSize}
+          className="fairslot-logo-mark"
+          style={{ objectFit: 'contain', objectPosition: 'center center', display: 'block' }}
+        />
+      </span>
 
       {showText && (
         <span style={{
-          fontFamily: "'Poppins', sans-serif",
+          fontFamily: "'Quicksand', sans-serif",
           fontWeight: 600,
           fontSize: size * 0.65,
           letterSpacing: '-0.02em',

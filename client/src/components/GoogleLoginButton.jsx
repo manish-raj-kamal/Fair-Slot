@@ -16,7 +16,11 @@ export default function GoogleLoginButton({ onSuccess, onError, text = 'signin_w
       window.google.accounts.id.initialize({
         client_id: GOOGLE_CLIENT_ID,
         callback: (response) => {
-          if (response.credential) onSuccess(response.credential);
+          if (response.credential) {
+            onSuccess(response.credential);
+            return;
+          }
+          onError?.(new Error('Google login did not return a credential'));
         },
         cancel_on_tap_outside: true,
       });
@@ -37,13 +41,13 @@ export default function GoogleLoginButton({ onSuccess, onError, text = 'signin_w
       const timeout = setTimeout(() => clearInterval(interval), 8000);
       return () => { clearInterval(interval); clearTimeout(timeout); };
     }
-  }, [onSuccess]);
+  }, [onSuccess, onError]);
 
   const handleClick = () => {
     if (window.google?.accounts?.id) {
       window.google.accounts.id.prompt((notification) => {
         if (notification.isSkippedMoment() || notification.isDismissedMoment()) {
-          // One Tap was dismissed — nothing to do, user can try again
+          onError?.(new Error('Google One Tap was skipped or dismissed'));
         }
       });
     }

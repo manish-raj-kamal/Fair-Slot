@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { deleteMyAccount, updateMyProfile, uploadMyAvatar } from '../services/api';
-import W8Icon from '../components/W8Icon';
+import { useAuth } from '../context/useAuth.js';
+import { deleteMyAccount, updateMyProfile, uploadMyAvatar } from '../services/api.js';
+import W8Icon from '../components/W8Icon.jsx';
 
 const roleLabels = {
   superadmin: { label: 'Super Admin', color: '#ef4444', bg: 'rgba(239,68,68,0.12)' },
@@ -47,15 +47,13 @@ export default function ProfilePage() {
   useEffect(() => {
     if (!user) return;
 
-    // Check if we are missing critical info (createdAt or Org Data if admin)
     const missingJoinedDate = !user.createdAt;
     const missingOrgMeta = user.role === 'org_admin' && (!user.organizationCode || !user.organizationJoinKey);
 
     if (missingJoinedDate || missingOrgMeta) {
-      console.log('ProfilePage: Missing user details detected, refreshing...', { missingJoinedDate, missingOrgMeta });
       refreshUser().catch((err) => console.error('Failed to refresh user profile:', err));
     }
-  }, [user?.createdAt, user?.organizationCode, user?.organizationJoinKey, user?.role, refreshUser]);
+  }, [user, refreshUser]);
 
   useEffect(() => {
     setOrgJoinKey(user?.organizationJoinKey || '');
