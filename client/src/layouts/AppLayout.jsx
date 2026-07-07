@@ -235,15 +235,6 @@ export default function AppLayout() {
       {menuOpen && <button className="backdrop" onClick={() => setMenuOpen(false)} aria-label="Close menu" />}
 
       <div className="main-shell">
-        <header className="topbar">
-          <button className="btn ghost mobile-only" onClick={() => setMenuOpen((s) => !s)}>☰ Menu</button>
-          <p className="muted">Smart booking for shared society resources</p>
-          {user?.role === 'org_admin' && (user?.organizationName || user?.organizationCode) && (
-            <p className="muted" style={{ marginLeft: 'auto' }}>
-              {user.organizationName || 'Organization'} {user.organizationCode ? `• ID ${user.organizationCode}` : ''}
-            </p>
-          )}
-        </header>
         <main className="page-content">
           <Outlet />
         </main>
