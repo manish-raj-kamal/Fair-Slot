@@ -80,7 +80,7 @@ export default function LandingPage() {
       <div className="wrap">
         <Hero />
 
-        <section>
+        <section id="how-it-works">
           <div className="section-eyebrow">How it works</div>
           <div className="section-title">A direct flow your team can trust</div>
           <div className="grid-3">
@@ -96,7 +96,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section>
+        <section id="benefits">
           <div className="section-eyebrow">Benefits</div>
           <div className="section-title">
             Less manual coordination, better outcomes
@@ -113,7 +113,9 @@ export default function LandingPage() {
             ))}
           </div>
 
-          <SecurityPanel />
+          <div id="security">
+            <SecurityPanel />
+          </div>
         </section>
 
         <CtaBanner />

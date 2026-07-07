@@ -2,7 +2,7 @@
 /* Uses the same Fraunces + Inter fonts, violet/sage/gold palette, and cream bg as the landing page */
 
 .fs-auth {
-  min-height: 100vh;
+  height: 100vh;
   background: var(--bg, #FBF6EF);
   background-image: radial-gradient(rgba(34,26,44,0.06) 1px, transparent 1px);
   background-size: 22px 22px;
@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 /* ── Background wash shapes ── */
@@ -53,7 +53,8 @@
 .fs-auth-main {
   position: relative; z-index: 2;
   flex: 1; display: flex; align-items: center; justify-content: center;
-  padding: 20px 32px 60px;
+  padding: 0 32px 20px;
+  overflow-y: auto;
 }
 
 /* ── Form card ── */
@@ -63,7 +64,7 @@
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border, rgba(34,26,44,0.09));
   border-radius: 20px;
-  padding: 32px 30px;
+  padding: 28px 28px;
   box-shadow: 0 20px 50px -16px rgba(34,26,44,0.14);
 }
 
@@ -127,7 +128,7 @@
 .fs-auth-divider span { padding: 0 14px; }
 
 /* ── Form fields ── */
-.fs-auth-form { display: grid; gap: 14px; }
+.fs-auth-form { display: grid; gap: 12px; }
 .fs-auth-field { display: flex; flex-direction: column; gap: 5px; }
 .fs-auth-field label {
   font-size: 13px; font-weight: 600; color: var(--ink, #221A2C);
@@ -149,7 +150,7 @@
 }
 .fs-auth-field input::placeholder { color: var(--ink-muted, rgba(34,26,44,0.4)); }
 
-.fs-auth-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.fs-auth-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
 
 /* ── Submit button ── */
 .fs-auth-submit {
@@ -356,10 +357,10 @@
 
 /* ── Mobile responsive ── */
 @media (max-width: 880px) {
-  .fs-auth-card { padding: 26px 22px; }
+  .fs-auth-card { padding: 22px 18px; }
   .fs-auth-card.wide { max-width: 420px; }
   .fs-auth-row { grid-template-columns: 1fr; }
   .fs-test-btns { flex-wrap: wrap; }
   .fs-auth-topbar { padding: 14px 20px; }
-  .fs-auth-main { padding: 16px 20px 40px; }
+  .fs-auth-main { padding: 0 20px 16px; }
 }

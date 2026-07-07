@@ -35,6 +35,8 @@
   font-family: 'Inter', sans-serif;
   position: relative;
   overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 .landing-root h1,
@@ -65,9 +67,10 @@
 .logo{ display:flex; align-items:center; gap:10px; font-family:'Fraunces', serif; font-weight:600; font-size:19px; letter-spacing:-0.2px; text-decoration:none; color: var(--ink); }
 .logo .fairslot-logo-mark{ border-radius:10px; }
 .logo-text{ font-family:'Fraunces', serif; font-weight:600; font-size:19px; letter-spacing:-0.2px; }
-.nav-links{ display:flex; gap:36px; font-size:14.5px; color: var(--ink-secondary); font-weight:500; }
-.nav-links span{ cursor: pointer; }
-.nav-actions{ display:flex; align-items:center; gap:12px; }
+.nav-links{ display:flex; gap:28px; font-size:14.5px; color: var(--ink-secondary); font-weight:500; }
+.nav-links span{ cursor: pointer; transition: color 0.2s ease; }
+.nav-links span:hover{ color: var(--violet); }
+.nav-actions{ display:flex; align-items:center; gap:16px; }
 
 .btn{
   font-family:'Inter', sans-serif; font-size:14.5px; font-weight:600;
