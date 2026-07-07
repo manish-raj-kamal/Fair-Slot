@@ -603,7 +603,7 @@ button {
   height: 88px;
   border-radius: 50%;
   padding: 3px;
-  background: linear-gradient(135deg, #7c3aed, #2f6fed, #22c55e);
+  background: linear-gradient(135deg, #7c3aed, #5B3FA0, #3F8663);
   box-shadow: 0 4px 20px rgba(124,58,237,0.18);
 }
 
@@ -611,7 +611,7 @@ button {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #7c3aed, #5B3FA0);
   display: grid;
   place-items: center;
   font-size: 1.6rem;
@@ -3077,12 +3077,12 @@ button {
   display: grid;
   gap: 14px;
   background:
-    radial-gradient(120% 150% at -5% -18%, #d9ebff 0%, transparent 52%),
-    radial-gradient(130% 160% at 100% 0%, #ffeacf 0%, transparent 53%),
-    linear-gradient(160deg, #f8fbff 0%, #eff5ff 50%, #edf1fb 100%);
-  border: 1px solid rgba(210, 223, 248, 0.8);
+    radial-gradient(120% 150% at -5% -18%, rgba(239,233,250,0.6) 0%, transparent 52%),
+    radial-gradient(130% 160% at 100% 0%, rgba(251,240,220,0.5) 0%, transparent 53%),
+    linear-gradient(160deg, #FBF6EF 0%, #f8f3ec 50%, #FBF6EF 100%);
+  border: 1px solid rgba(34, 26, 44, 0.08);
   box-shadow:
-    0 26px 58px rgba(31, 67, 132, 0.12),
+    0 26px 58px rgba(34, 26, 44, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.82);
 }
 
@@ -3105,7 +3105,7 @@ button {
   height: 300px;
   left: 0;
   top: 5%;
-  background: radial-gradient(circle at 38% 35%, rgba(95, 150, 255, 0.34), rgba(95, 150, 255, 0));
+  background: radial-gradient(circle at 38% 35%, rgba(91, 63, 160, 0.2), rgba(91, 63, 160, 0));
 }
 
 .luxe-orb.orb-two {
@@ -3114,7 +3114,7 @@ button {
   right: 10%;
   top: -8%;
   animation-delay: -3.5s;
-  background: radial-gradient(circle at 40% 35%, rgba(255, 172, 94, 0.3), rgba(255, 172, 94, 0));
+  background: radial-gradient(circle at 40% 35%, rgba(217, 154, 43, 0.2), rgba(217, 154, 43, 0));
 }
 
 .luxe-orb.orb-three {
@@ -3123,7 +3123,7 @@ button {
   right: 18%;
   bottom: -16%;
   animation-delay: -7.2s;
-  background: radial-gradient(circle at 52% 36%, rgba(61, 190, 170, 0.26), rgba(61, 190, 170, 0));
+  background: radial-gradient(circle at 52% 36%, rgba(63, 134, 99, 0.18), rgba(63, 134, 99, 0));
 }
 
 .luxe-grid {
@@ -3131,8 +3131,8 @@ button {
   inset: 0;
   opacity: 0.22;
   background-image:
-    linear-gradient(rgba(109, 138, 199, 0.2) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(109, 138, 199, 0.2) 1px, transparent 1px);
+    linear-gradient(rgba(91, 63, 160, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 63, 160, 0.12) 1px, transparent 1px);
   background-size: 40px 40px;
   mask-image: radial-gradient(circle at 50% 40%, #000 45%, transparent 88%);
   animation: luxeGridMove 20s linear infinite;
