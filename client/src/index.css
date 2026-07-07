@@ -2600,35 +2600,35 @@ button {
 /* ===== DASHBOARDS (Admin + User) ===== */
 
 .dashboard-luxe {
-  --dash-text: #111827;
-  --dash-text-muted: #4b5563;
+  --dash-text: #221A2C;
+  --dash-text-muted: rgba(34, 26, 44, 0.62);
   --dash-heading-font: 'Quicksand', 'Segoe UI', sans-serif;
   --dash-body-font: 'Quicksand', 'Segoe UI', sans-serif;
-  --dash-border: #dbe3f0;
+  --dash-border: rgba(34, 26, 44, 0.09);
   --dash-surface: #ffffff;
-  --dash-accent: #1f4fd1;
+  --dash-accent: #5B3FA0;
   position: relative;
   border-radius: 16px;
   padding: 24px;
   display: grid;
   gap: 24px;
-  background: #f8faff;
+  background: #FBF6EF;
   border: 1px solid var(--dash-border);
-  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+  box-shadow: 0 8px 24px rgba(34, 26, 44, 0.06);
 }
 
 .dashboard-surface {
   background: var(--dash-surface);
   border: 1px solid var(--dash-border);
   border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(17, 24, 39, 0.04);
+  box-shadow: 0 4px 16px rgba(34, 26, 44, 0.04);
 }
 
 .glass-panel {
   background: #ffffff;
-  border: 1px solid #dbe3f0;
+  border: 1px solid rgba(34, 26, 44, 0.09);
   border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(17, 24, 39, 0.04);
+  box-shadow: 0 4px 16px rgba(34, 26, 44, 0.04);
 }
 
 .dashboard-hero {
@@ -2683,13 +2683,13 @@ button {
   padding: 16px;
   border-radius: 12px;
   border: 1px solid var(--dash-border);
-  background: #f9fbff;
+  background: rgba(251, 246, 239, 0.5);
   display: grid;
   gap: 8px;
 }
 
 .hero-meta-chip span {
-  color: #4b5d82;
+  color: rgba(34, 26, 44, 0.55);
   font-family: var(--dash-body-font);
   font-size: 12px;
   line-height: 16px;
@@ -2726,9 +2726,9 @@ button {
 }
 
 .dashboard-cta.secondary {
-  border: 1px solid #cad5ea;
-  background: #eef3ff;
-  color: #213864;
+  border: 1px solid rgba(34, 26, 44, 0.12);
+  background: #EFE9FA;
+  color: #402D74;
 }
 
 .admin-live-pill {
@@ -2739,9 +2739,9 @@ button {
   width: 100%;
   min-height: 40px;
   border-radius: 999px;
-  border: 1px solid #c7d8f8;
-  background: #edf4ff;
-  color: #1f4fd1;
+  border: 1px solid rgba(91, 63, 160, 0.2);
+  background: #EFE9FA;
+  color: #5B3FA0;
   font-family: var(--dash-body-font);
   font-size: 12px;
   line-height: 16px;
@@ -2758,10 +2758,10 @@ button {
 .dashboard-inline-error {
   margin: 0;
   padding: 16px;
-  border: 1px solid #f3c4ca;
+  border: 1px solid rgba(214, 67, 124, 0.2);
   border-radius: 12px;
-  background: #fff6f7;
-  color: #9f1239;
+  background: #FBE8F0;
+  color: #A62F5F;
   font-family: var(--dash-body-font);
   font-size: 14px;
   line-height: 24px;
@@ -2786,7 +2786,7 @@ button {
   padding: 16px;
   border: 1px solid var(--dash-border);
   background: #ffffff;
-  box-shadow: 0 4px 16px rgba(17, 24, 39, 0.04);
+  box-shadow: 0 4px 16px rgba(34, 26, 44, 0.04);
 }
 
 .dashboard-stat-tile::before {
@@ -2801,14 +2801,14 @@ button {
 }
 
 .dashboard-stat-tile-skeleton::before {
-  background: #d6deec;
+  background: rgba(34, 26, 44, 0.06);
 }
 
 .stat-icon-shell {
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: #f3f6fb;
+  background: rgba(239, 233, 250, 0.35);
   border: 1px solid var(--dash-border);
   display: grid;
   place-items: center;
@@ -2821,7 +2821,7 @@ button {
 }
 
 .stat-text span {
-  color: #4b5d82;
+  color: rgba(34, 26, 44, 0.55);
   font-family: var(--dash-body-font);
   font-size: 12px;
   line-height: 16px;
@@ -2874,8 +2874,8 @@ button {
 }
 
 .dashboard-quick-item:hover {
-  border-color: #b9c8e5;
-  box-shadow: 0 4px 16px rgba(31, 79, 209, 0.08);
+  border-color: rgba(91, 63, 160, 0.25);
+  box-shadow: 0 4px 16px rgba(91, 63, 160, 0.08);
 }
 
 .dashboard-row-main {
@@ -2934,7 +2934,7 @@ button {
 }
 
 .admin-insight-head strong {
-  color: #0f3eab;
+  color: #402D74;
   font-family: var(--dash-heading-font);
   font-size: 20px;
   line-height: 24px;
@@ -2950,7 +2950,7 @@ button {
 .admin-meter-track {
   height: 8px;
   border-radius: 999px;
-  background: #dce5f5;
+  background: rgba(34, 26, 44, 0.06);
   overflow: hidden;
 }
 
@@ -2970,7 +2970,7 @@ button {
 }
 
 .dashboard-luxe .empty-state {
-  color: #5b6b8b;
+  color: rgba(34, 26, 44, 0.5);
   font-family: var(--dash-body-font);
   font-size: 14px;
   line-height: 24px;
@@ -2979,7 +2979,7 @@ button {
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #edf2f8 0%, #dfe7f3 50%, #edf2f8 100%);
+  background: linear-gradient(90deg, rgba(239,233,250,0.4) 0%, rgba(251,240,220,0.5) 50%, rgba(239,233,250,0.4) 100%);
   background-size: 200% 100%;
   border-radius: 8px;
   animation: dashboardSkeleton 1.2s ease-in-out infinite;
