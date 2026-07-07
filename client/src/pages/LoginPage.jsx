@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/useAuth.js';
+import { IconShieldCheck, IconArrowRight, IconArrowLeft, IconUsers, IconBuilding, IconLayoutGrid } from '@tabler/icons-react';
 import GoogleLoginButton from '../components/GoogleLoginButton.jsx';
-import W8Icon from '../components/W8Icon.jsx';
 import Logo from '../components/Logo.jsx';
+
+import '../components/landing/AuthPages.css';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -65,72 +67,71 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="auth-page login-page">
-      <div className="auth-side">
-        <div className="auth-side-content">
-          <Link to="/" className="auth-brand">
-            <Logo size={24} showText textColor="#e8f1ff" surface="dark" />
-          </Link>
-          <span className="auth-side-badge">Shared utility workspace</span>
-          <h1>Sign in and keep utility operations moving.</h1>
-          <p>Review bookings, approvals, and usage in one place without switching between tools.</p>
-          <div className="auth-side-features">
-            <div className="auth-feature"><W8Icon name="calendar-check" size={20} alt="" /> Book slots with conflict checks</div>
-            <div className="auth-feature"><W8Icon name="shield-check" size={20} alt="" /> Apply fairness rules consistently</div>
-            <div className="auth-feature"><W8Icon name="trend" size={20} alt="" /> Review usage and approvals at a glance</div>
-          </div>
-        </div>
+    <div className="fs-auth">
+      <div className="auth-wash-1"></div>
+      <div className="auth-wash-2"></div>
+
+      <div className="fs-auth-topbar">
+        <Link to="/" className="logo">
+          <Logo size={28} />
+          <span>FairSlot</span>
+        </Link>
+        <Link to="/" className="back-link">
+          <IconArrowLeft size={16} stroke={2} /> Back to home
+        </Link>
       </div>
 
-      <div className="auth-form-side">
-        <form className="auth-form-card" onSubmit={onSubmit}>
-          <div className="auth-form-header">
-            <span className="auth-kicker">Secure access</span>
+      <div className="fs-auth-main">
+        <div className="fs-auth-card">
+          <div className="fs-auth-header">
+            <div className="fs-auth-eyebrow">
+              <IconShieldCheck size={14} stroke={2} /> Secure access
+            </div>
             <h2>Sign in</h2>
-            <p className="muted">Enter your details to continue to your workspace.</p>
+            <p>Enter your details to continue to your workspace.</p>
           </div>
 
-          {error && <p className="error-banner">{error}</p>}
+          {error && <div className="fs-auth-error">{error}</div>}
 
           <GoogleLoginButton onSuccess={handleGoogle} text="signin_with" />
 
-          <div className="auth-divider">
-            <span>or continue with email</span>
-          </div>
+          <div className="fs-auth-divider"><span>or continue with email</span></div>
 
-          <label className="auth-label">
-            Email address
-            <input name="email" type="email" placeholder="you@example.com" value={form.email} onChange={onChange} required />
-          </label>
+          <form className="fs-auth-form" onSubmit={onSubmit}>
+            <div className="fs-auth-field">
+              <label>Email address</label>
+              <input name="email" type="email" placeholder="you@example.com" value={form.email} onChange={onChange} required />
+            </div>
 
-          <label className="auth-label">
-            Password
-            <input name="password" type="password" placeholder="••••••••" value={form.password} onChange={onChange} required />
-          </label>
+            <div className="fs-auth-field">
+              <label>Password</label>
+              <input name="password" type="password" placeholder="••••••••" value={form.password} onChange={onChange} required />
+            </div>
 
-          <button className="btn primary full" type="submit" disabled={loading}>
-            {loading ? 'Signing in...' : 'Sign In'}
-          </button>
+            <button className="fs-auth-submit" type="submit" disabled={loading}>
+              {loading ? <span className="fs-auth-spinner" /> : <>Sign In <IconArrowRight size={16} stroke={2} /></>}
+            </button>
+          </form>
 
-          <p className="auth-footer-text">
-            Don't have an account? <Link to="/register" className="link-accent">Create one</Link>
+          <p className="fs-auth-footer-text">
+            Don't have an account? <Link to="/register">Create one</Link>
           </p>
 
-          <div className="test-accounts">
-            <p className="test-accounts-label">Quick test login</p>
-            <div className="test-btns">
-              <button type="button" className="test-btn member" onClick={() => testLogin('member@test.com', 'member123')}>
-                <W8Icon name="people" size={16} alt="" /> Member
+          <div className="fs-test-accounts">
+            <p className="fs-test-label">Quick test login</p>
+            <div className="fs-test-btns">
+              <button type="button" className="fs-test-btn member" onClick={() => testLogin('member@test.com', 'member123')}>
+                <IconUsers size={14} stroke={2} /> Member
               </button>
-              <button type="button" className="test-btn admin" onClick={() => testLogin('admin@test.com', 'admin123')}>
-                <W8Icon name="building" size={16} alt="" /> Org Admin
+              <button type="button" className="fs-test-btn admin" onClick={() => testLogin('admin@test.com', 'admin123')}>
+                <IconBuilding size={14} stroke={2} /> Org Admin
               </button>
-              <button type="button" className="test-btn superadmin" onClick={() => testLogin('superadmin@utility.com', 'super123')}>
-                <W8Icon name="workspace" size={16} alt="" /> Superadmin
+              <button type="button" className="fs-test-btn superadmin" onClick={() => testLogin('superadmin@utility.com', 'super123')}>
+                <IconLayoutGrid size={14} stroke={2} /> Superadmin
               </button>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

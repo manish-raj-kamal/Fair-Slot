@@ -1,0 +1,365 @@
+/* ===== Auth Pages — FairSlot Landing-Matched Design ===== */
+/* Uses the same Fraunces + Inter fonts, violet/sage/gold palette, and cream bg as the landing page */
+
+.fs-auth {
+  min-height: 100vh;
+  background: var(--bg, #FBF6EF);
+  background-image: radial-gradient(rgba(34,26,44,0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink, #221A2C);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── Background wash shapes ── */
+.fs-auth .auth-wash-1 {
+  position: absolute; top: -160px; right: -200px; width: 600px; height: 600px;
+  background: linear-gradient(135deg, var(--violet-tint, #EFE9FA), var(--magenta-tint, #FBE8F0) 70%);
+  border-radius: 42%; transform: rotate(22deg);
+  z-index: 0; pointer-events: none; opacity: 0.8;
+}
+.fs-auth .auth-wash-2 {
+  position: absolute; bottom: -180px; left: -160px; width: 480px; height: 480px;
+  background: linear-gradient(135deg, var(--gold-tint, #FBF0DC), transparent 75%);
+  border-radius: 46%; transform: rotate(-15deg);
+  z-index: 0; pointer-events: none; opacity: 0.7;
+}
+
+/* ── Top bar ── */
+.fs-auth-topbar {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1180px; width: 100%;
+  margin: 0 auto; padding: 18px 32px;
+}
+.fs-auth-topbar .logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Fraunces', serif; font-weight: 600; font-size: 19px;
+  letter-spacing: -0.2px; text-decoration: none; color: var(--ink, #221A2C);
+}
+.fs-auth-topbar .logo .fairslot-logo-mark { border-radius: 10px; }
+.fs-auth-topbar .back-link {
+  font-size: 14px; font-weight: 500; color: var(--ink-secondary, rgba(34,26,44,0.62));
+  text-decoration: none; display: flex; align-items: center; gap: 6px;
+  transition: color 0.2s;
+}
+.fs-auth-topbar .back-link:hover { color: var(--ink, #221A2C); }
+.fs-auth-topbar .back-link svg { width: 16px; height: 16px; }
+
+/* ── Main container ── */
+.fs-auth-main {
+  position: relative; z-index: 2;
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 20px 32px 60px;
+}
+
+/* ── Form card ── */
+.fs-auth-card {
+  width: 100%; max-width: 420px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border, rgba(34,26,44,0.09));
+  border-radius: 20px;
+  padding: 32px 30px;
+  box-shadow: 0 20px 50px -16px rgba(34,26,44,0.14);
+}
+
+.fs-auth-card.wide { max-width: 480px; }
+
+/* ── Card header ── */
+.fs-auth-header { margin-bottom: 22px; }
+.fs-auth-eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.4px;
+  padding: 6px 14px; border-radius: 20px;
+  background: var(--violet-tint, #EFE9FA); color: var(--violet, #5B3FA0);
+  margin-bottom: 14px;
+}
+.fs-auth-eyebrow svg { width: 14px; height: 14px; }
+.fs-auth-header h2 {
+  font-family: 'Fraunces', serif; font-weight: 600;
+  font-size: 26px; letter-spacing: -0.4px; color: var(--ink, #221A2C);
+  margin: 0 0 6px;
+}
+.fs-auth-header p {
+  font-size: 14px; line-height: 1.6; color: var(--ink-secondary, rgba(34,26,44,0.62));
+  margin: 0;
+}
+
+/* ── Error banner ── */
+.fs-auth-error {
+  padding: 10px 14px; border-radius: 10px;
+  background: var(--magenta-tint, #FBE8F0); color: var(--magenta-dark, #A62F5F);
+  font-size: 13.5px; font-weight: 500; line-height: 1.5;
+  margin-bottom: 4px;
+  animation: fsAuthFadeIn 0.3s ease;
+}
+@keyframes fsAuthFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Google button ── */
+.fs-auth-card .google-btn-wrap { margin-bottom: 0; }
+.fs-auth-card .google-custom-btn {
+  border-radius: 10px; min-height: 44px; font-size: 14px;
+  border-color: var(--border-strong, rgba(34,26,44,0.16));
+  box-shadow: none;
+}
+.fs-auth-card .google-custom-btn:hover:not(:disabled) {
+  border-color: rgba(34,26,44,0.28);
+  box-shadow: 0 4px 14px rgba(34,26,44,0.06);
+}
+
+/* ── Divider ── */
+.fs-auth-divider {
+  display: flex; align-items: center; text-align: center;
+  color: var(--ink-muted, rgba(34,26,44,0.4));
+  font-size: 12.5px; font-weight: 500; margin: 14px 0;
+}
+.fs-auth-divider::before, .fs-auth-divider::after {
+  content: ''; flex: 1;
+  border-bottom: 1px solid var(--border, rgba(34,26,44,0.09));
+}
+.fs-auth-divider span { padding: 0 14px; }
+
+/* ── Form fields ── */
+.fs-auth-form { display: grid; gap: 14px; }
+.fs-auth-field { display: flex; flex-direction: column; gap: 5px; }
+.fs-auth-field label {
+  font-size: 13px; font-weight: 600; color: var(--ink, #221A2C);
+}
+.fs-auth-field input,
+.fs-auth-field select {
+  padding: 10px 13px; border-radius: 10px;
+  border: 1px solid var(--border-strong, rgba(34,26,44,0.16));
+  background: rgba(255,255,255,0.9);
+  font-size: 14px; font-family: 'Inter', sans-serif;
+  color: var(--ink, #221A2C);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.fs-auth-field input:focus,
+.fs-auth-field select:focus {
+  outline: none;
+  border-color: var(--violet, #5B3FA0);
+  box-shadow: 0 0 0 3px rgba(91,63,160,0.12);
+}
+.fs-auth-field input::placeholder { color: var(--ink-muted, rgba(34,26,44,0.4)); }
+
+.fs-auth-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* ── Submit button ── */
+.fs-auth-submit {
+  width: 100%; padding: 11px 20px; border: none; border-radius: 10px;
+  background: var(--violet, #5B3FA0); color: #fff;
+  font-family: 'Inter', sans-serif; font-size: 14.5px; font-weight: 600;
+  cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: 0 6px 18px rgba(91,63,160,0.25);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+  margin-top: 4px;
+}
+.fs-auth-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(91,63,160,0.32);
+}
+.fs-auth-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.fs-auth-submit svg { width: 16px; height: 16px; }
+
+/* ── Spinner ── */
+.fs-auth-spinner {
+  display: inline-block; width: 18px; height: 18px;
+  border: 2.5px solid rgba(255,255,255,0.35);
+  border-top-color: #fff; border-radius: 50%;
+  animation: fsAuthSpin 0.65s linear infinite;
+}
+@keyframes fsAuthSpin { to { transform: rotate(360deg); } }
+
+/* ── Footer text ── */
+.fs-auth-footer-text {
+  text-align: center; font-size: 13.5px; color: var(--ink-secondary, rgba(34,26,44,0.62));
+  margin-top: 8px;
+}
+.fs-auth-footer-text a {
+  color: var(--violet, #5B3FA0); font-weight: 600; text-decoration: none;
+}
+.fs-auth-footer-text a:hover { text-decoration: underline; }
+
+/* ── Test accounts ── */
+.fs-test-accounts {
+  margin-top: 10px; padding-top: 14px;
+  border-top: 1px solid var(--border, rgba(34,26,44,0.09));
+}
+.fs-test-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; text-align: center;
+  color: var(--ink-muted, rgba(34,26,44,0.4)); margin-bottom: 10px;
+}
+.fs-test-btns { display: flex; gap: 8px; justify-content: center; }
+.fs-test-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 8px; font-size: 12.5px; font-weight: 600;
+  border: 1px solid var(--border-strong, rgba(34,26,44,0.16));
+  background: transparent; cursor: pointer; font-family: 'Inter', sans-serif;
+  transition: background 0.2s, border-color 0.2s;
+}
+.fs-test-btn:hover { background: rgba(34,26,44,0.04); }
+.fs-test-btn.member { color: var(--violet, #5B3FA0); border-color: rgba(91,63,160,0.2); }
+.fs-test-btn.admin { color: var(--gold, #D99A2B); border-color: rgba(217,154,43,0.25); }
+.fs-test-btn.superadmin { color: var(--sage, #3F8663); border-color: rgba(63,134,99,0.2); }
+.fs-test-btn svg { width: 14px; height: 14px; }
+
+/* ── Role toggle ── */
+.fs-role-toggle {
+  display: grid; grid-template-columns: 1fr 1fr;
+  position: relative; background: var(--violet-tint, #EFE9FA);
+  border-radius: 12px; padding: 3px; gap: 0;
+  border: 1px solid rgba(91,63,160,0.12); margin-bottom: 4px;
+}
+.fs-role-btn {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  min-height: 40px; padding: 0 12px; border: none; background: transparent;
+  border-radius: 9px; font-weight: 600; font-size: 13px;
+  color: var(--ink-secondary, rgba(34,26,44,0.62)); cursor: pointer;
+  font-family: 'Inter', sans-serif; transition: color 0.3s ease;
+}
+.fs-role-btn.active { color: #fff; }
+.fs-role-btn svg { width: 15px; height: 15px; }
+.fs-role-slider {
+  position: absolute; top: 3px; height: calc(100% - 6px);
+  width: calc(50% - 3px); border-radius: 9px;
+  background: var(--violet, #5B3FA0);
+  box-shadow: 0 4px 12px rgba(91,63,160,0.25);
+  transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1;
+}
+.fs-role-slider.left { left: 3px; }
+.fs-role-slider.right { left: 50%; }
+
+/* ── Org fields animated expand ── */
+.fs-org-fields-wrap {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+.fs-org-fields-wrap.open { grid-template-rows: 1fr; opacity: 1; }
+.fs-org-fields-inner { overflow: hidden; display: grid; gap: 14px; }
+.fs-org-divider {
+  display: flex; align-items: center; gap: 8px;
+  color: var(--violet, #5B3FA0); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.8px;
+}
+.fs-org-divider::before, .fs-org-divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: var(--border, rgba(34,26,44,0.09));
+}
+
+/* ── Step dots (register) ── */
+.fs-steps-bar {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; margin-bottom: 18px;
+}
+.fs-step-dot {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 12px;
+  border: 2.5px solid var(--border-strong, rgba(34,26,44,0.16));
+  color: var(--ink-muted, rgba(34,26,44,0.4)); background: #fff;
+  transition: all 0.45s cubic-bezier(.4,0,.2,1);
+  position: relative; z-index: 1;
+}
+.fs-step-dot.active {
+  border-color: var(--violet, #5B3FA0);
+  background: var(--violet, #5B3FA0);
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(91,63,160,0.12), 0 4px 12px rgba(91,63,160,0.2);
+}
+.fs-step-line {
+  width: 56px; height: 2.5px;
+  background: var(--border-strong, rgba(34,26,44,0.16));
+  border-radius: 4px; transition: background 0.4s;
+}
+.fs-step-line.filled {
+  background: linear-gradient(90deg, var(--violet, #5B3FA0), var(--violet-tint, #EFE9FA));
+}
+
+/* ── Step panels ── */
+.fs-step-panel { transition: transform 0.4s cubic-bezier(.4,0,.2,1), opacity 0.35s ease; }
+.fs-step-panel.visible { position: relative; transform: translateX(0); opacity: 1; pointer-events: auto; }
+.fs-step-panel.hidden-left {
+  position: absolute; top: 80px; left: 30px; right: 30px;
+  transform: translateX(-120%); opacity: 0; pointer-events: none; height: 0; overflow: hidden;
+}
+.fs-step-panel.hidden-right {
+  position: absolute; top: 80px; left: 30px; right: 30px;
+  transform: translateX(120%); opacity: 0; pointer-events: none; height: 0; overflow: hidden;
+}
+
+/* ── OTP boxes ── */
+.fs-otp-row {
+  display: flex; justify-content: center; gap: 10px; margin: 16px 0 20px;
+}
+.fs-otp-box {
+  width: 46px; height: 52px; text-align: center;
+  font-size: 1.4rem; font-weight: 700; color: var(--ink, #221A2C);
+  border: 2px solid var(--border-strong, rgba(34,26,44,0.16));
+  border-radius: 10px; background: rgba(255,255,255,0.9);
+  outline: none; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.fs-otp-box:focus {
+  border-color: var(--violet, #5B3FA0);
+  box-shadow: 0 0 0 3px rgba(91,63,160,0.12);
+  transform: scale(1.06);
+}
+.fs-otp-box.filled { border-color: rgba(91,63,160,0.4); background: var(--violet-tint, #EFE9FA); }
+
+.fs-otp-actions {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 6px; font-size: 13px;
+}
+.fs-otp-actions button {
+  background: none; border: none; cursor: pointer; padding: 4px 0;
+  font-weight: 500; font-family: 'Inter', sans-serif;
+  color: var(--violet, #5B3FA0);
+}
+.fs-otp-actions button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── OTP icon ── */
+.fs-otp-icon {
+  display: flex; justify-content: center; margin-bottom: 10px;
+  color: var(--violet, #5B3FA0);
+}
+
+/* ── Success panel ── */
+.fs-success-panel {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 12px; padding: 32px 0 16px; text-align: center;
+}
+.fs-success-icon {
+  width: 72px; height: 72px; display: grid; place-items: center;
+  border-radius: 20px; background: var(--sage-tint, #E5F2EA);
+  color: var(--sage, #3F8663);
+}
+
+/* ── Shake animation ── */
+.fs-shake { animation: fsShake 0.45s ease; }
+@keyframes fsShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+/* ── Mobile responsive ── */
+@media (max-width: 880px) {
+  .fs-auth-card { padding: 26px 22px; }
+  .fs-auth-card.wide { max-width: 420px; }
+  .fs-auth-row { grid-template-columns: 1fr; }
+  .fs-test-btns { flex-wrap: wrap; }
+  .fs-auth-topbar { padding: 14px 20px; }
+  .fs-auth-main { padding: 16px 20px 40px; }
+}

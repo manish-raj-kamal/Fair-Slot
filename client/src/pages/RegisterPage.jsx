@@ -2,9 +2,14 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/useAuth.js';
 import { sendRegistrationOtp } from '../services/api.js';
+import {
+  IconArrowLeft, IconArrowRight, IconShieldCheck,
+  IconUsers, IconBuilding, IconMailOpened, IconCircleCheck,
+} from '@tabler/icons-react';
 import GoogleLoginButton from '../components/GoogleLoginButton.jsx';
-import W8Icon from '../components/W8Icon.jsx';
 import Logo from '../components/Logo.jsx';
+
+import '../components/landing/AuthPages.css';
 
 const SIX_DIGITS = /^\d{6}$/;
 
@@ -23,7 +28,7 @@ export default function RegisterPage() {
   };
 
   const [mode, setMode] = useState('member');
-  const [step, setStep] = useState(1);           // 1=form  2=otp  3=success
+  const [step, setStep] = useState(1);
   const [form, setForm] = useState({
     name: '', email: '', flatNumber: '', password: '',
     phone: '', orgName: '', orgType: 'society', orgAddress: '', contactEmail: '', joinKey: ''
@@ -37,14 +42,12 @@ export default function RegisterPage() {
 
   const isOrg = mode === 'org_admin';
 
-  // cooldown tick
   useEffect(() => {
     if (cooldown <= 0) return;
     const t = setTimeout(() => setCooldown((c) => c - 1), 1000);
     return () => clearTimeout(t);
   }, [cooldown]);
 
-  // auto-focus first OTP box when step 2
   useEffect(() => {
     if (step === 2) otpRefs.current[0]?.focus();
   }, [step]);
@@ -56,7 +59,6 @@ export default function RegisterPage() {
     setTimeout(() => setShake(false), 500);
   }, []);
 
-  /* step 1 → send OTP */
   const handleSendOtp = async (e) => {
     e.preventDefault();
     setError(''); setLoading(true);
@@ -75,7 +77,6 @@ export default function RegisterPage() {
     } finally { setLoading(false); }
   };
 
-  /* resend */
   const handleResend = async () => {
     if (cooldown > 0) return;
     setError(''); setLoading(true);
@@ -89,7 +90,6 @@ export default function RegisterPage() {
     } finally { setLoading(false); }
   };
 
-  /* otp input helpers */
   const onOtpChange = (idx, val) => {
     if (!/^\d?$/.test(val)) return;
     const next = [...otp]; next[idx] = val; setOtp(next);
@@ -108,7 +108,6 @@ export default function RegisterPage() {
     otpRefs.current[Math.min(pasted.length, 5)]?.focus();
   };
 
-  /* step 2 → verify & register */
   const handleVerify = async (e) => {
     e.preventDefault();
     const emailOtp = otp.join('');
@@ -122,7 +121,7 @@ export default function RegisterPage() {
       } else {
         data = await register({ name: form.name, email: form.email, password: form.password, flatNumber: form.flatNumber, emailOtp });
       }
-      setStep(3); // success
+      setStep(3);
       setTimeout(() => navigate(getHomeRoute(data.user)), 1800);
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
@@ -140,143 +139,119 @@ export default function RegisterPage() {
     } finally { setLoading(false); }
   };
 
-  /* ── left-panel dynamic content ── */
-  const sideContent = {
-    1: {
-      title: isOrg ? 'Register your organization' : 'Join your community',
-      sub: isOrg
-        ? 'Set up your society, college, or company and start managing shared utilities in minutes.'
-        : 'Create an account to start booking shared utilities — parking, halls, EV charging and more.',
-      feats: isOrg
-        ? [{ icon: 'organizations', text: 'Manage multiple utilities' }, { icon: 'analytics', text: 'Analytics and audit logs' }, { icon: 'users', text: 'Invite members instantly' }]
-        : [{ icon: 'notifications', text: 'Instant notifications' }, { icon: 'calendar', text: 'Community hall booking' }, { icon: 'utilities', text: 'EV charger scheduling' }],
-    },
-    2: {
-      title: 'Verify your email',
-      sub: `We sent a 6-digit code to ${form.email}. Enter it below to finish creating your account.`,
-      feats: [{ icon: 'email', text: 'Check your inbox and spam' }, { icon: 'clock', text: 'Code expires in 10 minutes' }, { icon: 'lock', text: 'Secure one-time code' }],
-    },
-    3: {
-      title: 'You\'re all set!',
-      sub: 'Your account has been created successfully. Redirecting you now…',
-      feats: [{ icon: 'check', text: 'Welcome aboard' }, { icon: 'home', text: 'Dashboard loading' }],
-    },
-  }[step];
-
   return (
-    <div className="auth-page register-page">
-      <div className="auth-side">
-        <div className="auth-side-content reg-side-content" key={step}>
-          <Link to="/" className="auth-brand">
-            <Logo size={24} showText textColor="#e8f1ff" surface="dark" />
-          </Link>
-          <span className="auth-side-badge">Create account in minutes</span>
-          <h1 className="reg-side-title">{sideContent.title}</h1>
-          <p className="reg-side-sub">{sideContent.sub}</p>
-          <div className="auth-side-features reg-side-feats">
-            {sideContent.feats.map((item, i) => (
-              <div className="auth-feature" key={i} style={{ animationDelay: `${i * 0.12}s` }}>
-                <W8Icon name={item.icon} size={20} alt="" /> {item.text}
-              </div>
-            ))}
-          </div>
-        </div>
+    <div className="fs-auth">
+      <div className="auth-wash-1"></div>
+      <div className="auth-wash-2"></div>
+
+      <div className="fs-auth-topbar">
+        <Link to="/" className="logo">
+          <Logo size={28} />
+          <span>FairSlot</span>
+        </Link>
+        <Link to="/" className="back-link">
+          <IconArrowLeft size={16} stroke={2} /> Back to home
+        </Link>
       </div>
 
-      <div className="auth-form-side reg-form-side">
-        <div className={`auth-form-card reg-card ${shake ? 'reg-shake' : ''}`}>
-          <div className="reg-steps-bar">
-            <div className={`reg-step-dot ${step >= 1 ? 'active' : ''}`}>
-              {step > 1 ? <span className="reg-dot-check">✓</span> : '1'}
+      <div className="fs-auth-main">
+        <div className={`fs-auth-card wide ${shake ? 'fs-shake' : ''}`}>
+          {/* Step bar */}
+          <div className="fs-steps-bar">
+            <div className={`fs-step-dot ${step >= 1 ? 'active' : ''}`}>
+              {step > 1 ? '✓' : '1'}
             </div>
-            <div className={`reg-step-line ${step >= 2 ? 'filled' : ''}`} />
-            <div className={`reg-step-dot ${step >= 2 ? 'active' : ''}`}>
-              {step > 2 ? <span className="reg-dot-check">✓</span> : '2'}
+            <div className={`fs-step-line ${step >= 2 ? 'filled' : ''}`} />
+            <div className={`fs-step-dot ${step >= 2 ? 'active' : ''}`}>
+              {step > 2 ? '✓' : '2'}
             </div>
           </div>
 
-          <div className={`reg-step-panel ${step === 1 ? 'visible' : step > 1 ? 'hidden-left' : 'hidden-right'}`}>
-            <form onSubmit={handleSendOtp} className="reg-form-inner">
-              <div className="auth-form-header">
-                <span className="auth-kicker">Set up access</span>
-                <h2>Create account</h2>
-                <p className="muted">Choose the account type that fits your role.</p>
+          {/* ─── Step 1: Form ─── */}
+          <div className={`fs-step-panel ${step === 1 ? 'visible' : step > 1 ? 'hidden-left' : 'hidden-right'}`}>
+            <div className="fs-auth-header">
+              <div className="fs-auth-eyebrow">
+                <IconShieldCheck size={14} stroke={2} /> Set up access
               </div>
+              <h2>Create account</h2>
+              <p>Choose the account type that fits your role.</p>
+            </div>
 
-              {/* Role toggle */}
-              <div className="role-toggle">
-                <button type="button" className={`role-toggle-btn ${!isOrg ? 'active' : ''}`} onClick={() => setMode('member')}>
-                  <W8Icon name="people" size={16} alt="" className="role-toggle-icon" /> Member
-                </button>
-                <button type="button" className={`role-toggle-btn ${isOrg ? 'active' : ''}`} onClick={() => setMode('org_admin')}>
-                  <W8Icon name="building" size={16} alt="" className="role-toggle-icon" /> Organization
-                </button>
-                <div className={`role-toggle-slider ${isOrg ? 'right' : 'left'}`} />
-              </div>
+            {/* Role toggle */}
+            <div className="fs-role-toggle">
+              <button type="button" className={`fs-role-btn ${!isOrg ? 'active' : ''}`} onClick={() => setMode('member')}>
+                <IconUsers size={15} stroke={2} /> Member
+              </button>
+              <button type="button" className={`fs-role-btn ${isOrg ? 'active' : ''}`} onClick={() => setMode('org_admin')}>
+                <IconBuilding size={15} stroke={2} /> Organization
+              </button>
+              <div className={`fs-role-slider ${isOrg ? 'right' : 'left'}`} />
+            </div>
 
-              {error && step === 1 && <p className="error-banner reg-error">{error}</p>}
+            {error && step === 1 && <div className="fs-auth-error">{error}</div>}
 
-              {!isOrg && <GoogleLoginButton onSuccess={handleGoogle} text="signup_with" />}
-              {!isOrg && <div className="auth-divider"><span>or register with email</span></div>}
+            {!isOrg && <GoogleLoginButton onSuccess={handleGoogle} text="signup_with" />}
+            {!isOrg && <div className="fs-auth-divider"><span>or register with email</span></div>}
 
-              <div className="auth-row">
-                <label className="auth-label">
-                  Full name
+            <form className="fs-auth-form" onSubmit={handleSendOtp}>
+              <div className="fs-auth-row">
+                <div className="fs-auth-field">
+                  <label>Full name</label>
                   <input name="name" placeholder="Rahul Sharma" value={form.name} onChange={onChange} required />
-                </label>
+                </div>
                 {!isOrg ? (
-                  <label className="auth-label">
-                    Flat / Unit
+                  <div className="fs-auth-field">
+                    <label>Flat / Unit</label>
                     <input name="flatNumber" placeholder="A-401" value={form.flatNumber} onChange={onChange} required />
-                  </label>
+                  </div>
                 ) : (
-                  <label className="auth-label">
-                    Email address
+                  <div className="fs-auth-field">
+                    <label>Email address</label>
                     <input name="email" type="email" placeholder="you@example.com" value={form.email} onChange={onChange} required />
-                  </label>
+                  </div>
                 )}
               </div>
 
               {!isOrg && (
-                <label className="auth-label">
-                  Email address
+                <div className="fs-auth-field">
+                  <label>Email address</label>
                   <input name="email" type="email" placeholder="you@example.com" value={form.email} onChange={onChange} required />
-                </label>
+                </div>
               )}
 
-              <label className="auth-label">
-                Password
+              <div className="fs-auth-field">
+                <label>Password</label>
                 <input name="password" type="password" placeholder="Min 6 characters" value={form.password} onChange={onChange} minLength={6} required />
-              </label>
+              </div>
 
               {/* Org fields */}
-              <div className={`org-fields-wrap ${isOrg ? 'open' : ''}`}>
-                <div className="org-fields-inner">
-                  <div className="org-fields-divider"><span>Organization details</span></div>
+              <div className={`fs-org-fields-wrap ${isOrg ? 'open' : ''}`}>
+                <div className="fs-org-fields-inner">
+                  <div className="fs-org-divider"><span>Organization details</span></div>
 
-                  <div className="auth-row">
-                    <label className="auth-label">
-                      Organization name
+                  <div className="fs-auth-row">
+                    <div className="fs-auth-field">
+                      <label>Organization name</label>
                       <input name="orgName" placeholder="Sunshine Society" value={form.orgName} onChange={onChange} required={isOrg} />
-                    </label>
-                    <label className="auth-label">
-                      Type
+                    </div>
+                    <div className="fs-auth-field">
+                      <label>Type</label>
                       <select name="orgType" value={form.orgType} onChange={onChange}>
                         <option value="society">Society</option>
                         <option value="college">College</option>
                         <option value="company">Company</option>
                         <option value="other">Other</option>
                       </select>
-                    </label>
+                    </div>
                   </div>
 
-                  <div className="auth-row">
-                    <label className="auth-label">
-                      Phone (optional)
+                  <div className="fs-auth-row">
+                    <div className="fs-auth-field">
+                      <label>Phone (optional)</label>
                       <input name="phone" placeholder="+91 98765 43210" value={form.phone} onChange={onChange} />
-                    </label>
-                    <label className="auth-label">
-                      Organization Join Key (optional, 6 digits)
+                    </div>
+                    <div className="fs-auth-field">
+                      <label>Join Key (optional, 6 digits)</label>
                       <input
                         name="joinKey"
                         placeholder="654321"
@@ -284,51 +259,50 @@ export default function RegisterPage() {
                         onChange={(e) => setForm((p) => ({ ...p, joinKey: e.target.value.replace(/\D/g, '').slice(0, 6) }))}
                         inputMode="numeric"
                       />
-                    </label>
+                    </div>
                   </div>
 
-                  <div className="auth-row">
-                    <label className="auth-label">
-                      Address (optional)
-                      <input name="orgAddress" placeholder="123 Main St" value={form.orgAddress} onChange={onChange} />
-                    </label>
+                  <div className="fs-auth-field">
+                    <label>Address (optional)</label>
+                    <input name="orgAddress" placeholder="123 Main St" value={form.orgAddress} onChange={onChange} />
                   </div>
                 </div>
               </div>
 
-              <button className="btn primary full reg-cta" type="submit" disabled={loading}>
+              <button className="fs-auth-submit" type="submit" disabled={loading}>
                 {loading ? (
-                  <span className="reg-spinner" />
+                  <span className="fs-auth-spinner" />
                 ) : (
-                  <>Continue — Verify Email <span className="reg-arrow">→</span></>
+                  <>Continue — Verify Email <IconArrowRight size={16} stroke={2} /></>
                 )}
               </button>
-
-              <p className="auth-footer-text">
-                Already have an account? <Link to="/login" className="link-accent">Sign in</Link>
-              </p>
             </form>
+
+            <p className="fs-auth-footer-text">
+              Already have an account? <Link to="/login">Sign in</Link>
+            </p>
           </div>
 
-          <div className={`reg-step-panel ${step === 2 ? 'visible' : step > 2 ? 'hidden-left' : 'hidden-right'}`}>
-            <form onSubmit={handleVerify} className="reg-form-inner reg-otp-form">
-              <div className="reg-otp-icon">
-                <W8Icon name="mail-open" size={34} alt="" />
-              </div>
+          {/* ─── Step 2: OTP ─── */}
+          <div className={`fs-step-panel ${step === 2 ? 'visible' : step > 2 ? 'hidden-left' : 'hidden-right'}`}>
+            <div className="fs-otp-icon">
+              <IconMailOpened size={34} stroke={1.5} />
+            </div>
 
-              <div className="auth-form-header" style={{ textAlign: 'center' }}>
-                <h2>Enter verification code</h2>
-                <p className="muted">Sent to <strong>{form.email}</strong></p>
-              </div>
+            <div className="fs-auth-header" style={{ textAlign: 'center' }}>
+              <h2>Enter verification code</h2>
+              <p>Sent to <strong>{form.email}</strong></p>
+            </div>
 
-              {error && step === 2 && <p className="error-banner reg-error">{error}</p>}
+            {error && step === 2 && <div className="fs-auth-error">{error}</div>}
 
-              <div className="otp-input-row">
+            <form className="fs-auth-form" onSubmit={handleVerify} style={{ textAlign: 'center' }}>
+              <div className="fs-otp-row">
                 {otp.map((d, i) => (
                   <input
                     key={i}
                     ref={(el) => (otpRefs.current[i] = el)}
-                    className={`otp-box ${d ? 'filled' : ''}`}
+                    className={`fs-otp-box ${d ? 'filled' : ''}`}
                     type="text"
                     inputMode="numeric"
                     maxLength={1}
@@ -340,28 +314,29 @@ export default function RegisterPage() {
                 ))}
               </div>
 
-              <button className="btn primary full reg-cta" type="submit" disabled={loading || otp.join('').length < 6}>
-                {loading ? <span className="reg-spinner" /> : 'Verify & Create Account'}
+              <button className="fs-auth-submit" type="submit" disabled={loading || otp.join('').length < 6}>
+                {loading ? <span className="fs-auth-spinner" /> : 'Verify & Create Account'}
               </button>
-
-              <div className="otp-actions">
-                <button type="button" className="link-accent" onClick={() => { setStep(1); setError(''); }}>
-                  ← Back
-                </button>
-                <button type="button" className={`link-accent ${cooldown > 0 ? 'disabled' : ''}`} onClick={handleResend} disabled={cooldown > 0}>
-                  {cooldown > 0 ? `Resend in ${cooldown}s` : 'Resend code'}
-                </button>
-              </div>
             </form>
+
+            <div className="fs-otp-actions">
+              <button type="button" onClick={() => { setStep(1); setError(''); }}>
+                ← Back
+              </button>
+              <button type="button" onClick={handleResend} disabled={cooldown > 0}>
+                {cooldown > 0 ? `Resend in ${cooldown}s` : 'Resend code'}
+              </button>
+            </div>
           </div>
 
-          <div className={`reg-step-panel ${step === 3 ? 'visible' : 'hidden-right'}`}>
-            <div className="reg-form-inner reg-success-panel">
-              <div className="reg-success-icon">
-                <W8Icon name="check-circle" size={42} alt="" />
+          {/* ─── Step 3: Success ─── */}
+          <div className={`fs-step-panel ${step === 3 ? 'visible' : 'hidden-right'}`}>
+            <div className="fs-success-panel">
+              <div className="fs-success-icon">
+                <IconCircleCheck size={42} stroke={1.5} />
               </div>
               <h2>Account created!</h2>
-              <p className="muted">Redirecting you to your dashboard…</p>
+              <p style={{ color: 'var(--ink-secondary)' }}>Redirecting you to your dashboard…</p>
             </div>
           </div>
         </div>
