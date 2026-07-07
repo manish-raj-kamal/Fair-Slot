@@ -36,8 +36,8 @@ export default function UserDashboard() {
 
         if (!active) return;
         setStats(statsResponse.data);
-        setBookings(bookingsResponse.data.slice(0, 5));
-        setUtilities(utilitiesResponse.data.slice(0, 4));
+        setBookings(bookingsResponse.data);
+        setUtilities(utilitiesResponse.data);
       } catch {
         if (!active) return;
         setError('Unable to load your latest dashboard data. Please refresh the page.');
@@ -53,10 +53,24 @@ export default function UserDashboard() {
   }, []);
 
   const upcomingBooking = useMemo(() => {
+    const now = new Date().getTime();
     return bookings
-      .filter((b) => b?.startTime && b.status !== 'cancelled')
+      .filter((b) => b?.startTime && b.status !== 'cancelled' && new Date(b.startTime).getTime() > now)
       .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime())[0];
   }, [bookings]);
+
+  const topUtilities = useMemo(() => {
+    if (!utilities.length) return [];
+    const tally = {};
+    bookings.forEach(b => {
+      const uid = b.utilityId?._id || b.utilityId;
+      if (uid) tally[uid] = (tally[uid] || 0) + 1;
+    });
+    
+    return [...utilities]
+      .sort((a, b) => (tally[b._id] || 0) - (tally[a._id] || 0))
+      .slice(0, 3);
+  }, [bookings, utilities]);
 
   return (
     <div className="dash-container-new">
@@ -69,8 +83,8 @@ export default function UserDashboard() {
       <DashboardStatsGrid stats={stats} isLoading={isLoading} />
       
       <div className="dash-panels-container">
-        <RecentBookingsPanel bookings={bookings} isLoading={isLoading} />
-        <QuickBookPanel utilities={utilities} isLoading={isLoading} />
+        <RecentBookingsPanel bookings={bookings.slice(0, 3)} isLoading={isLoading} />
+        <QuickBookPanel utilities={topUtilities} isLoading={isLoading} />
       </div>
     </div>
   );
